@@ -4,6 +4,10 @@ import java.util.Comparator;
 
 import com.test.techolution.util.SatisfactionTime;
 
+/**
+ * @author Rajeev
+ *
+ */
 public class TimeTakenComperator implements Comparator<SatisfactionTime> {
 
 	public int compare(SatisfactionTime o1, SatisfactionTime o2) {

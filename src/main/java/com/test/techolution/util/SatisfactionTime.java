@@ -1,5 +1,9 @@
 package com.test.techolution.util;
 
+/**
+ * @author Rajeev
+ *
+ */
 public class SatisfactionTime {
 
 	private int index;
