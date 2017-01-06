@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<head>
+
+
+<script> 
+    $(function(){
+    	
+    	 $("#left-menu").load("menu"); 
+    	 $("#rmenu").load("rightMenu");
+    	 //$('#msg').delay(10000).fadeOut();
+    	 //$('#emsg').delay(10000).fadeOut();
+    	 //$('#resp').delay(10000).fadeOut();
+    });
+    </script>
+</head>
+<body>
+	<div id="wrapper">
+	<div id="header" th:replace="fragment/header :: header"></div>
+	<div id="left-menu"></div>
+	<!-- Page Content -->
+		<div id="page-wrapper">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-14">
+					<div id="rmenu" ></div>
+					<h2>
+						<!-- <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">
+						<img th:src="@{/css/toggle.png}" width="32" height="32" /></a>&nbsp; -->
+					</h2>
+					<hr/>
+					
+					<div class="box" >
+						<div class="box-body" >
+							<div class="row" th:if="${smsg} != null OR ${emsg} != null OR ${response} != null" >
+								<div class="col-sm-12">	
+									<p id="msg" th:text="${smsg}" align="center" style="color: green;"/>
+									<p id="emsg" th:text="${emsg}" align="center" style="color: red;"/>
+									<p id="resp" th:text="${response}" align="center" style="color: green;"/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- <div class="container">
+						<table th:if="${smsg} != null OR ${emsg} != null OR ${response} != null" style="width: 100%;">
+							<tr>
+								<td>
+									<p id="msg" th:text="${smsg}" align="center" style="color: green;"/>
+									<p id="emsg" th:text="${emsg}" align="center" style="color: red;"/>
+									<p id="resp" th:text="${response}" align="center" style="color: green;"/>
+								</td>
+							</tr>
+						</table>
+					</div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="footer" th:replace="fragment/footer :: footer"></div>
+</div>
+		
+	<!-- /#page-content-wrapper -->
+	<!-- /#wrapper -->
+
+	<!-- jQuery -->
+	<!-- <script th:src="@{/js/jquery.js}"></script> -->
+
+	<!-- Bootstrap Core JavaScript -->
+	<!-- <script th:src="@{/js/bootstrap.min.js}"></script> -->
+
+	<!-- Menu Toggle Script -->
+	<!-- <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script> -->
+	<script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+
+	function DropDown(el) {
+		this.dd = el;
+		this.initEvents();
+	}
+	DropDown.prototype = {
+		initEvents : function() {
+			var obj = this;
+
+			obj.dd.on('click', function(event){
+				$(this).toggleClass('active');
+				event.stopPropagation();
+			});	
+		}
+	}
+
+	$(function() {
+		var dd = new DropDown( $('#dd') );
+		$(document).click(function() {
+			// all dropdowns
+			$('.wrapper-dropdown-5').removeClass('active');
+		});
+	});
+	</script>
+</body>
+</html>
