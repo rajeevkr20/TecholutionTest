@@ -33,7 +33,7 @@ public class TecholutionController {
 	 * @throws Exception
 	 */
 	@RequestMapping( value = "/findSatisfaction/{haveTime}/{noOfiItem}")
-	public int searchUserUsage( HttpServletRequest request,Model model, @PathVariable Integer haveTime, @PathVariable Integer noOfiItem) throws Exception
+	public int findSatisfaction( HttpServletRequest request,Model model, @PathVariable Integer haveTime, @PathVariable Integer noOfiItem) throws Exception
 	{
 		
 		
