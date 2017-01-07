@@ -9,12 +9,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.test.techolution.comperator.SatisfactionComperator;
 import com.test.techolution.comperator.TimeTakenComperator;
 import com.test.techolution.util.SatisfactionTime;
 
@@ -23,6 +23,11 @@ import com.test.techolution.util.SatisfactionTime;
 @RequestMapping("/techolution")
 public class TecholutionController {
 
+	private int noOfComperasion = 0;
+	
+	
+	private Logger log = Logger.getLogger(TecholutionController.class);
+	
 	
 	/**
 	 * @param request
@@ -33,17 +38,18 @@ public class TecholutionController {
 	 * @throws Exception
 	 */
 	@RequestMapping( value = "/findSatisfaction/{haveTime}/{noOfiItem}")
-	public int findSatisfaction( HttpServletRequest request,Model model, @PathVariable Integer haveTime, @PathVariable Integer noOfiItem) throws Exception
+	public Object findSatisfaction( HttpServletRequest request,Model model, @PathVariable Integer haveTime, @PathVariable Integer noOfiItem) throws Exception
 	{
-		
+		noOfComperasion = 0;
 		
 		List<SatisfactionTime> satsfactionTimeList = readInputFile();
 		int satisfactionScore = getMaxSatisfaction(satsfactionTimeList, haveTime, noOfiItem );
-		Collections.sort(satsfactionTimeList, new TimeTakenComperator());
-		System.out.println(satsfactionTimeList);
 		
-		Collections.sort(satsfactionTimeList, new SatisfactionComperator());
-		System.out.println(satsfactionTimeList);
+		if(noOfComperasion == 0){
+			
+			log.info("You dont have much time to test "+noOfiItem +" item.");
+			return "You dont have much time to test "+noOfiItem +" item.";
+		}
 		return satisfactionScore;
 	}
 	
@@ -87,7 +93,11 @@ public class TecholutionController {
 		}
 		if(time > haveTime)
 		{
+			
 			score = 0;
+		}
+		else {
+			noOfComperasion++;
 		}
 		return score;
 		
@@ -111,7 +121,7 @@ public class TecholutionController {
 		       st.setTimeTaken(strLine[1] != null ? Integer.parseInt(strLine[1]) : null);
 		       st.setIndex(i++);
 		       satsfactionTimeList.add(st);
-		       System.out.println(st.toString());
+		       //System.out.println(st.toString());
 		       line = br.readLine();
 		    }
 		   
