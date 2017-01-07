@@ -41,7 +41,12 @@ public class TecholutionController {
 	public Object findSatisfaction( HttpServletRequest request,Model model, @PathVariable Integer haveTime, @PathVariable Integer noOfiItem) throws Exception
 	{
 		noOfComperasion = 0;
-		
+		if(haveTime == 0){
+			return "You dont have any time so you don't have satisfaction.";
+		}
+		if(noOfiItem == 0){
+			return "Please try some item.";
+		}
 		List<SatisfactionTime> satsfactionTimeList = readInputFile();
 		int satisfactionScore = getMaxSatisfaction(satsfactionTimeList, haveTime, noOfiItem );
 		

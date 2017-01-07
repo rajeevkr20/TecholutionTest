@@ -24,7 +24,10 @@ public class TecholutionTest {
   
   
     
-     @Test
+     /**
+     * @throws Exception
+     */
+    @Test
      public void testFindSatisfaction() throws Exception {
         
     	 String url = BASE_URL+"/techolution/findSatisfaction/1000/2";
@@ -36,7 +39,10 @@ public class TecholutionTest {
          
      }
      
-     @Test
+     /**
+     * @throws Exception
+     */
+    @Test
      public void testFindSatisfaction1() throws Exception {
         
     	 String url = BASE_URL+"/techolution/findSatisfaction/1000/20";
@@ -48,7 +54,10 @@ public class TecholutionTest {
          
      }
      
-     @Test
+     /**
+     * @throws Exception
+     */
+    @Test
      public void testFindSatisfaction2() throws Exception {
         
     	 String url = BASE_URL+"/techolution/findSatisfaction/400/1";
@@ -57,6 +66,36 @@ public class TecholutionTest {
   
 		 System.out.println(str);
 		 assertEquals("99248", str);    
+         
+     }
+    
+    /**
+     * @throws Exception
+     */
+    @Test
+     public void testFindSatisfaction3() throws Exception {
+        
+    	 String url = BASE_URL+"/techolution/findSatisfaction/400/0";
+    	 RestTemplate restTemplate = new RestTemplate();
+		 String str = (String) restTemplate.getForObject(url, String.class);
+  
+		 System.out.println(str);
+		 assertEquals("Please try some item.", str);    
+         
+     }
+    
+    /**
+     * @throws Exception
+     */
+    @Test
+     public void testFindSatisfaction4() throws Exception {
+        
+    	 String url = BASE_URL+"/techolution/findSatisfaction/0/11";
+    	 RestTemplate restTemplate = new RestTemplate();
+		 String str = (String) restTemplate.getForObject(url, String.class);
+  
+		 System.out.println(str);
+		 assertEquals("You dont have any time so you don't have satisfaction.", str);    
          
      }
 
