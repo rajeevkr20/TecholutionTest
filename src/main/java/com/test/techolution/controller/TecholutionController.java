@@ -25,7 +25,8 @@ public class TecholutionController {
 
 	private int noOfComperasion = 0;
 	
-	
+	private int timeTaken;
+	private int satisfactionSc;
 	private Logger log = Logger.getLogger(TecholutionController.class);
 	
 	
@@ -41,14 +42,14 @@ public class TecholutionController {
 	public Object findSatisfaction( HttpServletRequest request,Model model, @PathVariable Integer haveTime, @PathVariable Integer noOfiItem) throws Exception
 	{
 		noOfComperasion = 0;
-		if(haveTime == 0){
+		/*if(haveTime == 0){
 			return "You dont have any time so you don't have satisfaction.";
 		}
 		if(noOfiItem == 0){
 			return "Please try some item.";
-		}
+		}*/
 		List<SatisfactionTime> satsfactionTimeList = readInputFile();
-		int satisfactionScore = getMaxSatisfaction(satsfactionTimeList, haveTime, noOfiItem );
+		int satisfactionScore = getMaxSatisfaction(satsfactionTimeList, timeTaken, satisfactionSc );
 		
 		if(noOfComperasion == 0){
 			
@@ -125,8 +126,13 @@ public class TecholutionController {
 		       st.setSatisfactionAmount(strLine[0] != null ? Integer.parseInt(strLine[0]) : null);
 		       st.setTimeTaken(strLine[1] != null ? Integer.parseInt(strLine[1]) : null);
 		       st.setIndex(i++);
-		       satsfactionTimeList.add(st);
-		       //System.out.println(st.toString());
+		       if(i==1){
+		    	   timeTaken = Integer.parseInt(strLine[1]);
+		    	   satisfactionSc = Integer.parseInt(strLine[0]);
+		       }
+		       else {
+		    	   satsfactionTimeList.add(st);
+		       }//System.out.println(st.toString());
 		       line = br.readLine();
 		    }
 		   

@@ -13,8 +13,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @author Rajeev
  *
  */
-@Configuration
-@EnableAutoConfiguration
+
 
 @SpringBootApplication
 @EnableScheduling
